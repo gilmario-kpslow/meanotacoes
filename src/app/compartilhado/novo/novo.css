@@ -1,0 +1,33 @@
+.dialog-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* Garante que o título não tenha padding estranho */
+    padding-right: 12px;
+}
+
+/* Garante que o título se ajuste */
+.dialog-header h2 {
+    flex-grow: 1;
+    margin: 0;
+}
+
+/* Container do formulário */
+.form-container {
+    display: flex;
+    flex-direction: column;
+    padding-top: 15px;
+    /* Espaço do topo */
+    gap: 10px;
+    /* Espaço entre os campos */
+}
+
+/* Garante que os campos ocupem 100% da largura */
+.full-width {
+    width: 100%;
+}
+
+/* Ajusta as ações para não terem borda superior */
+mat-dialog-actions {
+    border-top: none;
+}

@@ -1,0 +1,7 @@
+@if (tagsInfo) {
+<mat-chip-set class="example-chip">
+    @for (tag of tags(); track tag) {
+    <mat-chip class="example-box">{{tag}}</mat-chip>
+    }
+</mat-chip-set>
+}

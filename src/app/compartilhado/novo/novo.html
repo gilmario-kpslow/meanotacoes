@@ -1,0 +1,56 @@
+<div class="dialog-header">
+    <h2 mat-dialog-title>Adicionar Novo Projeto</h2>
+    <button mat-icon-button (click)="onCancelar()" aria-label="Fechar modal">
+        <mat-icon>close</mat-icon>
+    </button>
+</div>
+
+<mat-dialog-content>
+    <form [formGroup]="cadastroForm" class="form-container">
+
+
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Nome do Projeto</mat-label>
+            <input matInput formControlName="titulo" cdkFocusInitial>
+
+            @if (cadastroForm.get('titulo')?.hasError('required') && cadastroForm.get('titulo')?.touched) {
+            <mat-error>O nome é obrigatório.</mat-error>
+            }
+        </mat-form-field>
+        <mat-form-field class="example-form-field">
+            <mat-label>TAG</mat-label>
+            <mat-chip-grid #chipGrid aria-label="Enter keywords">
+                @for (keyword of keywords(); track keyword) {
+                <mat-chip-row (removed)="removeKeyword(keyword)">
+                    {{keyword}}
+                    <button matChipRemove [attr.aria-label]="'remove ' + keyword">
+                        <mat-icon>cancel</mat-icon>
+                    </button>
+                </mat-chip-row>
+                }
+            </mat-chip-grid>
+            <input placeholder="New keyword..." [matChipInputFor]="chipGrid" (matChipInputTokenEnd)="add($event)" />
+        </mat-form-field>
+        <!-- <mat-form-field appearance="outline" class="full-width">
+            <mat-label>TAG</mat-label>
+            <input matInput [formControl]="tagInput" (keyup.enter)="addTag()">
+        </mat-form-field> -->
+
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Descrição</mat-label>
+            <textarea matInput formControlName="descricao" rows="4"></textarea>
+        </mat-form-field>
+
+
+
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions [align]="'end'">
+    <button mat-button (click)="onCancelar()">Cancelar</button>
+    <button mat-flat-button color="primary" (click)="onSalvar()" [disabled]="!cadastroForm.valid">
+        Salvar
+    </button>
+</mat-dialog-actions>
+
+{{cadastroForm.value | json}}
