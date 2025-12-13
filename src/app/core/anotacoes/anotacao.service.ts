@@ -14,7 +14,7 @@ export class AnotacaoService {
     }
 
     salvar(anotacao: any) {
-        anotacao.usuario = this.seguranca.auth?.record.id;
+        anotacao.usuario = this.seguranca.getUsuario()?.record?.id;
         return this.pocketbase.create(ANOTACOES, anotacao);
     }
 }

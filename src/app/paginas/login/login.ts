@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { LoginService } from './login.service';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
@@ -21,6 +21,7 @@ import { environment } from '../../../environments/environment';
     MatInputModule,
     MatButtonModule,
     InputContent,
+    RouterModule,
     CommonModule],
   templateUrl: './login.html',
   styleUrl: './login.css', providers: [LoginService]
@@ -40,6 +41,10 @@ export class Login {
       username: this.fb.nonNullable.control(environment.usuario, [Validators.required]),
       password: this.fb.nonNullable.control(environment.senha, [Validators.required]),
     })
+
+    if (this.segurancaService.logado) {
+      this.router.navigate(['/']);
+    }
   }
 
   login() {

@@ -2,27 +2,45 @@ import { inject, Injectable } from "@angular/core";
 import { CanActivate, Router } from "@angular/router";
 import { RecordAuthResponse, RecordModel } from "pocketbase";
 import { HOME, LOGIN } from "../constantes/routas";
+import { UsuarioLogado } from "./usuario.logado";
+import { PocketbaseService } from "../pocketbase";
 
 @Injectable({ providedIn: 'root' })
-export class SegurancaService implements CanActivate {
+export class SegurancaService {
 
-    auth: RecordAuthResponse<RecordModel> | undefined;
-    private router = inject(Router);
+    private usuario?: UsuarioLogado;
+    private readonly router = inject(Router);
+    private readonly pocketbase = inject(PocketbaseService);
 
-    logar(record: RecordAuthResponse<RecordModel>) {
-        this.auth = record;
-        this.router.navigate(['/'])
-    }
-
-    isLogado(): boolean {
-        return this.auth !== undefined;
-    }
-
-    canActivate(): boolean {
-        if (this.isLogado()) {
-            return true;
+    constructor() {
+        if (this.tokenValido()) {
+            this.usuario = {
+                record: this.pocketbase.client.authStore.record,
+                token: this.pocketbase.client.authStore.token,
+            };
         }
+    }
+
+    logar(user: UsuarioLogado) {
+        this.usuario = user;
+        this.router.navigate(['/']);
+    }
+
+    logout() {
+        this.usuario = undefined;
         this.router.navigate(['/', LOGIN]);
-        return false;
+        this.pocketbase.client.authStore.clear();
+    }
+
+    get logado() {
+        return this.usuario != undefined && this.tokenValido();
+    }
+
+    tokenValido(): boolean {
+        return this.pocketbase.client.authStore.isValid;
+    }
+
+    getUsuario() {
+        return this.usuario;
     }
 }

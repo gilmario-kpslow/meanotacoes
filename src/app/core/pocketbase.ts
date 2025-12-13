@@ -7,7 +7,7 @@ import { USUARIOS } from "./constantes/colecoes";
 @Injectable({ providedIn: "root" })
 export class PocketbaseService {
 
-    private client: PocketBase;
+    readonly client: PocketBase;
 
     constructor() {
         this.client = new PocketBase(environment.api);
