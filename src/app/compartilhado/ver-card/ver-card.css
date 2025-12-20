@@ -1,0 +1,25 @@
+.card-footer {
+    padding: 1rem;
+    background-color: #f9f9f9;
+    border-top: 1px solid #eee;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    /* Reset de margem para garantir alinhamento no Material */
+    margin: 0 !important;
+}
+
+.card-footer .meta-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+}
+
+.card-footer .meta-info .label {
+    color: #777;
+    font-weight: 500;
+}
+
+.card-footer .meta-info .value {
+    color: #333;
+}

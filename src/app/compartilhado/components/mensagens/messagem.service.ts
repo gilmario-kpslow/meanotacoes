@@ -27,9 +27,10 @@ export class MensagemService {
   }
 
   open(mensagem: Mensagem, tipo: string, fn?: Function) {
-    this._snackBar.open(mensagem.titulo, mensagem.detalhe, {
+    this._snackBar.open(mensagem.mensagem, mensagem.titulo, {
       horizontalPosition: 'center',
       verticalPosition: 'top',
+      duration: 3000
     });
   }
 }

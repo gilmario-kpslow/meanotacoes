@@ -7,7 +7,7 @@ import { USUARIOS } from "./constantes/colecoes";
 @Injectable({ providedIn: "root" })
 export class PocketbaseService {
 
-    readonly client: PocketBase;
+    private readonly client: PocketBase;
 
     constructor() {
         this.client = new PocketBase(environment.api);
@@ -18,8 +18,9 @@ export class PocketbaseService {
     }
 
 
-    listar(colecao: string) {
-        return from(this.client.collection(colecao).getList());
+    listar(colecao: string, page?: number, perPage?: number) {
+        console.log('Listar', page, perPage);
+        return from(this.client.collection(colecao).getList(page, perPage));
     }
 
     getError(response: Response, data: any): any {
@@ -28,5 +29,21 @@ export class PocketbaseService {
 
     create(colecao: string, record: any) {
         return from(this.client.collection(colecao).create(record));
+    }
+
+    notificar(colecao: string, fn: (e: any) => void) {
+        return from(this.client.collection(colecao).subscribe("*", fn));
+    }
+
+    authStore() {
+        return this.client.authStore;
+    }
+
+    editar(colecao: string, record: any) {
+        return from(this.client.collection(colecao).update(record.id, record));
+    }
+
+    excluir(colecao: string, id: string) {
+        return from(this.client.collection(colecao).delete(id));
     }
 }

@@ -15,8 +15,8 @@ export class SegurancaService {
     constructor() {
         if (this.tokenValido()) {
             this.usuario = {
-                record: this.pocketbase.client.authStore.record,
-                token: this.pocketbase.client.authStore.token,
+                record: this.pocketbase.authStore().record,
+                token: this.pocketbase.authStore().token,
             };
         }
     }
@@ -29,7 +29,7 @@ export class SegurancaService {
     logout() {
         this.usuario = undefined;
         this.router.navigate(['/', LOGIN]);
-        this.pocketbase.client.authStore.clear();
+        this.pocketbase.authStore().clear();
     }
 
     get logado() {
@@ -37,7 +37,7 @@ export class SegurancaService {
     }
 
     tokenValido(): boolean {
-        return this.pocketbase.client.authStore.isValid;
+        return this.pocketbase.authStore().isValid;
     }
 
     getUsuario() {

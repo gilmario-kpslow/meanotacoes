@@ -1,7 +1,7 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -23,20 +23,22 @@ import { CommonModule } from '@angular/common';
   templateUrl: './novo.html',
   styleUrl: './novo.css',
 })
-export class Novo {
+export class Novo implements OnInit {
 
   private fb = inject(FormBuilder);
   public dialogRef = inject(MatDialogRef<Novo>);
-  cadastroForm: FormGroup;
   readonly keywords = signal([] as string[]);
+  private readonly data = inject<any>(MAT_DIALOG_DATA);
 
+  cadastroForm = this.fb.group({
+    id: [],
+    titulo: ['', Validators.required],
+    descricao: [''],
+    tag: [''],
+  });
 
-  constructor() {
-    this.cadastroForm = this.fb.group({
-      titulo: ['', Validators.required],
-      descricao: [''],
-      tag: ['']
-    });
+  ngOnInit(): void {
+    this.cadastroForm.patchValue(this.data);
   }
 
   onCancelar(): void {

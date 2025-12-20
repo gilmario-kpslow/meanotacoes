@@ -1,4 +1,9 @@
 /* Container principal */
+:host {
+    height: 100vh;
+    display: block;
+}
+
 .container {
     padding: 2rem;
     max-width: 1200px;
@@ -119,4 +124,8 @@
 .header-container h1 {
     margin: 0;
     /* Remove margem do h1 */
+}
+
+.h-100 {
+    height: 100%;
 }
