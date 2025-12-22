@@ -39,6 +39,8 @@ export class Novo implements OnInit {
 
   ngOnInit(): void {
     this.cadastroForm.patchValue(this.data);
+    this.setTags(this.data.tag);
+
   }
 
   onCancelar(): void {
@@ -78,5 +80,13 @@ export class Novo implements OnInit {
     }
 
     event.chipInput!.clear();
+  }
+
+  setTags(tag?: string) {
+    if (!tag) {
+      return
+    }
+    const tags = tag.split(',');
+    this.keywords.set(tags);
   }
 }

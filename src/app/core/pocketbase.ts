@@ -19,7 +19,6 @@ export class PocketbaseService {
 
 
     listar(colecao: string, page?: number, perPage?: number) {
-        console.log('Listar', page, perPage);
         return from(this.client.collection(colecao).getList(page, perPage));
     }
 

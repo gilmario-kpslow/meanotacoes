@@ -15,12 +15,11 @@ import { Excluir } from '../../compartilhado/excluir/excluir';
 import { MatPaginator, MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
 import { ListaResponse } from '../../core/models/lista-respone';
 import { PaginadorDefault } from '../../compartilhado/implementacoes/paginador-defaults';
-import { SanitizePipe } from '../../compartilhado/pipe/sanitize.pipe';
 import { VerCard } from '../../compartilhado/ver-card/ver-card';
 
 @Component({
   selector: 'app-home',
-  imports: [MatCardModule, MatButtonModule, SanitizePipe, MatIconModule, CommonModule, MatExpansionModule, MatInputModule, MatChipsModule, TagsComponent, MatPaginatorModule],
+  imports: [MatCardModule, MatButtonModule, MatIconModule, CommonModule, MatExpansionModule, MatInputModule, MatChipsModule, TagsComponent, MatPaginatorModule],
   providers: [AnotacaoService,
     { provide: MatPaginatorIntl, useClass: PaginadorDefault },
   ],

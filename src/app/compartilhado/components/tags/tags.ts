@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, signal } from '@angular/core';
+import { Component, computed, input, Input, OnInit, signal } from '@angular/core';
 import { MatChipsModule } from '@angular/material/chips';
 
 @Component({
@@ -7,19 +7,14 @@ import { MatChipsModule } from '@angular/material/chips';
   templateUrl: './tags.html',
   styleUrl: './tags.css',
 })
-export class TagsComponent implements OnInit {
+export class TagsComponent {
 
-  @Input() tagsInfo: string = '';
-  readonly tags = signal<string[]>([]);
-
-
-  ngOnInit(): void {
-    const part = this.tagsInfo.split(',');
+  readonly tagsInfo = input<string>();
+  readonly tags = computed(() => {
+    const part = this.tagsInfo()?.split(',') || '';
     if (part.length > 0) {
-      this.tags.update((value) => {
-        return [...value, ...part];
-      });
+      return part;
     }
-  }
-
+    return [];
+  });
 }
