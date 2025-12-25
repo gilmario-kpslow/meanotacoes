@@ -1,5 +1,11 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -18,13 +24,12 @@ import { CommonModule } from '@angular/common';
     MatFormFieldModule,
     MatIconModule,
     MatChipsModule,
-    CommonModule
+    CommonModule,
   ],
   templateUrl: './novo.html',
   styleUrl: './novo.css',
 })
 export class Novo implements OnInit {
-
   private fb = inject(FormBuilder);
   public dialogRef = inject(MatDialogRef<Novo>);
   readonly keywords = signal([] as string[]);
@@ -38,9 +43,10 @@ export class Novo implements OnInit {
   });
 
   ngOnInit(): void {
-    this.cadastroForm.patchValue(this.data);
-    this.setTags(this.data.tag);
-
+    if (this.data) {
+      this.cadastroForm.patchValue(this.data);
+      this.setTags(this.data.tag);
+    }
   }
 
   onCancelar(): void {
@@ -55,7 +61,7 @@ export class Novo implements OnInit {
 
   removeKeyword(keyword: string) {
     this.cadastroForm.get('tag')?.setValue(``);
-    this.keywords.update(keywords => {
+    this.keywords.update((keywords) => {
       const index = keywords.indexOf(keyword);
       if (index < 0) {
         return keywords;
@@ -64,7 +70,6 @@ export class Novo implements OnInit {
 
       this.cadastroForm.get('tag')?.setValue(keywords.reduce((a, b) => `${a},${b}`));
       return [...keywords];
-
     });
   }
 
@@ -72,7 +77,7 @@ export class Novo implements OnInit {
     const value = (event.value || '').trim();
 
     if (value) {
-      this.keywords.update(keywords => {
+      this.keywords.update((keywords) => {
         const tags = [...keywords, value];
         this.cadastroForm.get('tag')?.setValue(tags.reduce((a, b) => `${a},${b}`));
         return [...keywords, value];
@@ -84,7 +89,7 @@ export class Novo implements OnInit {
 
   setTags(tag?: string) {
     if (!tag) {
-      return
+      return;
     }
     const tags = tag.split(',');
     this.keywords.set(tags);

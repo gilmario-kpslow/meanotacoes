@@ -2,10 +2,26 @@
 
 html,
 body {
-    height: 100vh;
+  height: 100vh;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 body {
-    margin: 0;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+.h-100 {
+  height: 100%;
+}
+
+.grid-cards {
+  display: grid;
+  /* Cria colunas responsivas:
+     Mínimo de 300px, preenchendo o espaço restante (1fr)
+  */
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 30px;
 }

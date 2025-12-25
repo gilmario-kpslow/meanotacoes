@@ -1,10 +1,6 @@
 <div class="d-flex flex-column h-100">
-    <div class="container-fluid flex-fill">
-        <h1>Anotações</h1>
-        <div class="mb-3">
-            <button matButton="elevated" (click)="novo()"> <mat-icon>add</mat-icon> Novo</button>
+    <div class="container-fluid">
 
-        </div>
         <div class="row">
             <div class="col-md-4">
                 <mat-form-field class="w-100" appearance="fill">
@@ -19,18 +15,18 @@
                 </mat-form-field>
             </div>
         </div>
+    </div>
 
 
-        <div class="grid-cards">
+    <div class="flex-fill">
+        <div class="grid-cards px-3">
             @for (item of itens(); track item.id) {
             <mat-card class="card-item" appearance="outlined">
-
                 <mat-card-header>
                     <div mat-card-avatar class="example-header-image">
                         <mat-icon class="text-success">check</mat-icon>
                     </div>
                     <mat-card-title>{{ item.titulo }}</mat-card-title>
-                    <mat-card-subtitle>ID: <span class="text-muted">#{{ item.id }}</span></mat-card-subtitle>
                 </mat-card-header>
                 <hr>
                 <mat-card-content>
@@ -40,17 +36,6 @@
                     </div>
 
                 </mat-card-content>
-
-                <!-- <mat-card-footer class="card-footer"> -->
-                <!-- <div class="meta-info">
-                        <span class="label">Criado em:</span>
-                        <span class="value">{{ item.created | date:'dd/MM/yyyy' }}</span>
-                    </div> -->
-                <!-- <div class="meta-info">
-                        <span class="label">Atualizado:</span>
-                        <span class="value">{{ item.updated | date:'dd/MM/yyyy HH:mm' }}</span>
-                    </div> -->
-                <!-- </mat-card-footer> -->
 
                 <mat-card-actions [align]="'end'">
                     <button matButton (click)="ver(item)">VER</button>
@@ -71,12 +56,5 @@
         <mat-paginator #paginador [length]="listaResponse.totalItems" (page)="paginar($event)" [pageSize]="8"
             [pageSizeOptions]="[4, 8, 16, 32, 64,128]" aria-label="Selecione uma página">
         </mat-paginator>
-
     </div>
 </div>
-<div class="float-button">
-    <button class="mx-3" matFab (click)="novo()"><mat-icon>add</mat-icon></button>
-    <button matFab (click)="buscar()"><mat-icon>refresh</mat-icon></button>
-</div>
-
-<!-- <app-paginador></app-paginador> -->

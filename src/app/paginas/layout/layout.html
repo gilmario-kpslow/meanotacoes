@@ -1,0 +1,38 @@
+<div class="d-flex flex-column h-100">
+    <mat-toolbar class="border mb-3">
+        <button matIconButton class="example-icon" [matMenuTriggerFor]="anotacao"
+            aria-label="Example icon-button with menu icon">
+            <mat-icon>notes</mat-icon>
+        </button>
+        <mat-menu #anotacao="matMenu">
+            <button mat-menu-item (click)="novo()">
+                <mat-icon>add</mat-icon> Novo
+            </button>
+            <button mat-menu-item (click)="buscar()">
+                <mat-icon>refresh</mat-icon> Atualizar
+            </button>
+        </mat-menu>
+        <h2>ANOTAÇÕES</h2>
+        <span class="example-spacer"></span>
+        <button matIconButton class="example-icon favorite-icon text-success"
+            aria-label="Example icon-button with heart icon" [matMenuTriggerFor]="usuario">
+            <mat-icon>person</mat-icon>
+        </button>
+
+        <mat-menu #usuario="matMenu">
+            <button mat-menu-item routerLink="perfil">
+                <mat-icon>admin_panel_settings</mat-icon> Perfil
+            </button>
+            <button mat-menu-item (click)="logout()">
+                <mat-icon>power_settings_new</mat-icon> Sair
+            </button>
+        </mat-menu>
+    </mat-toolbar>
+    <div class=" flex-fill">
+        <router-outlet />
+    </div>
+    <div class="float-button">
+        <button class="mx-3" matFab (click)="novo()"><mat-icon>add</mat-icon></button>
+        <button matFab (click)="buscar()"><mat-icon>refresh</mat-icon></button>
+    </div>
+</div>
