@@ -51,9 +51,7 @@ export class Layout {
 
   adicionarNovoItem(result: any) {
     this.service.salvar(result).subscribe((resp) => {
-      this.mensagem.sucesso('Registro salvo', 'OK', 'OK', () => {
-        // console.log('Fim');
-      });
+      this.mensagem.sucesso('Registro salvo', 'OK', 'OK', () => {});
     });
   }
 

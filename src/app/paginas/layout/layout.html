@@ -12,7 +12,7 @@
                 <mat-icon>refresh</mat-icon> Atualizar
             </button>
         </mat-menu>
-        <h2>ANOTAÇÕES</h2>
+        <h2 routerLink="/" class="cursor" style="cursor: pointer;">ANOTAÇÕES</h2>
         <span class="example-spacer"></span>
         <button matIconButton class="example-icon favorite-icon text-success"
             aria-label="Example icon-button with heart icon" [matMenuTriggerFor]="usuario">
@@ -31,8 +31,5 @@
     <div class=" flex-fill">
         <router-outlet />
     </div>
-    <div class="float-button">
-        <button class="mx-3" matFab (click)="novo()"><mat-icon>add</mat-icon></button>
-        <button matFab (click)="buscar()"><mat-icon>refresh</mat-icon></button>
-    </div>
+
 </div>

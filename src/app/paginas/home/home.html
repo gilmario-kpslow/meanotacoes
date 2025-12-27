@@ -5,19 +5,29 @@
             <div class="col-md-4">
                 <mat-form-field class="w-100" appearance="fill">
                     <mat-label>Título</mat-label>
-                    <input type="text" matInput required appInputContent>
+                    <input type="text" matInput required appInputContent [formControl]="titulo">
                 </mat-form-field>
             </div>
             <div class="col-md-4">
-                <mat-form-field class="w-100" appearance="fill">
-                    <mat-label>Tag</mat-label>
-                    <input type="text" matInput required appInputContent>
+                <mat-form-field appearance="fill" class="w-100">
+                    <mat-label>TAG</mat-label>
+                    <mat-chip-grid #chipGrid aria-label="Enter keywords" style="width: 100%;">
+                        @for (keyword of keywords(); track keyword) {
+                        <mat-chip-row (removed)="removeKeyword(keyword)">
+                            {{keyword}}
+                            <button matChipRemove [attr.aria-label]="'remove ' + keyword">
+                                <mat-icon>cancel</mat-icon>
+                            </button>
+                        </mat-chip-row>
+                        }
+                    </mat-chip-grid>
+                    <input placeholder="" [matChipInputFor]="chipGrid" (matChipInputTokenEnd)="add($event)" />
                 </mat-form-field>
             </div>
         </div>
     </div>
 
-
+    {{keywords()}}
     <div class="flex-fill">
         <div class="grid-cards px-3">
             @for (item of itens(); track item.id) {
@@ -57,4 +67,10 @@
             [pageSizeOptions]="[4, 8, 16, 32, 64,128]" aria-label="Selecione uma página">
         </mat-paginator>
     </div>
+
+    <div class="float-button">
+        <button class="mx-3" matFab (click)="novo()"><mat-icon>add</mat-icon></button>
+        <button matFab (click)="buscar()"><mat-icon>refresh</mat-icon></button>
+    </div>
+
 </div>

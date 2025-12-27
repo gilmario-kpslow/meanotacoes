@@ -1,1 +1,24 @@
-<p>perfil works!</p>
+<div class="container">
+
+    <mat-card appearance="outlined">
+        <mat-card-header class="border mb-3">
+            <div mat-card-avatar>
+                <mat-icon class="text-success">person</mat-icon>
+            </div>
+            <mat-card-title> Dados do usuário</mat-card-title>
+            <mat-card-subtitle>
+                <span class="text-muted fs-6">{{ usuario?.record?.id }}</span>
+            </mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+            <div>Nome: <span class="fs-4">{{ usuario?.record?.name }}</span></div>
+            <div>Email: <span class="fs-4">{{ usuario?.record?.email }}</span></div>
+        </mat-card-content>
+
+        <mat-card-actions [align]="'end'">
+            <button matButton (click)="salvar()">Salvar</button>
+        </mat-card-actions>
+
+    </mat-card>
+</div>
