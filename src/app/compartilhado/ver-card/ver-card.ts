@@ -11,7 +11,5 @@ import { TagsComponent } from '../components/tags/tags';
   styleUrl: './ver-card.css',
 })
 export class VerCard {
-
   readonly data = inject<any>(MAT_DIALOG_DATA);
-
 }
