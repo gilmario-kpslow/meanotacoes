@@ -1,10 +1,6 @@
-<h2 mat-dialog-title>
-    <div>
-        {{data.titulo}}
-    </div>
-    <div class="h6">
-        ID:<span class="text-secondary">{{data.id}}</span>
-    </div>
+<h2 mat-dialog-title title="ID: {{data.id}}" class="d-flex justify-content-between mt-3">
+    <span>{{data.titulo}}</span>
+    <button matIconButton mat-dialog-close><mat-icon class="text-danger">close</mat-icon></button>
 </h2>
 <hr>
 <mat-dialog-content>

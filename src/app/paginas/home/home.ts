@@ -199,4 +199,18 @@ export class Home implements AfterViewInit {
     this.buscar();
     event.chipInput!.clear();
   }
+
+  proximo() {
+    if (this.paginador && this.paginador.pageIndex < this.listaResponse.totalPages - 1) {
+      this.paginador.pageIndex = this.paginador.pageIndex + 1;
+      this.listar();
+    }
+  }
+
+  voltar() {
+    if (this.paginador && this.paginador.pageIndex > 0) {
+      this.paginador.pageIndex = this.paginador.pageIndex - 1;
+      this.listar();
+    }
+  }
 }
