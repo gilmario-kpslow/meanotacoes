@@ -1,13 +1,17 @@
 import { Routes } from '@angular/router';
-import { HOME, LOGIN, PERFIL } from './core/constantes/routas';
+import { HOME, LOGIN, PERFIL, PUBLICA } from './core/constantes/routas';
 import { AuthGuard } from './core/seguranca/auth.guard';
 
 export const routes: Routes = [
   {
-    path: HOME,
+    path: '',
     loadComponent: () => import('./paginas/layout/layout').then((a) => a.Layout),
-    canActivate: [AuthGuard],
     children: [
+      {
+        path: PUBLICA,
+        loadComponent: () =>
+          import('./paginas/pagina-publica/pagina-publica').then((a) => a.PaginaPublica),
+      },
       {
         path: HOME,
         loadComponent: () => import('./paginas/home/home').then((a) => a.Home),

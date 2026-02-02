@@ -31,9 +31,11 @@
                 <mat-form-field class="w-100" appearance="fill">
                   <mat-label>Senha</mat-label>
                   <input type="password" matInput required formControlName="password" name="password">
-                  <mat-error *ngIf="form?.controls?.['password']?.hasError('required')">
+                  @if(form.get('password')?.hasError('required')) {
+                  <mat-error>
                     Campo obrigatório
                   </mat-error>
+                  }
                 </mat-form-field>
               </div>
             </div>
@@ -45,4 +47,6 @@
       </div>
     </div>
   </form>
+
+
 </main>

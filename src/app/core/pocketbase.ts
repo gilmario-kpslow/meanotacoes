@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import PocketBase from 'pocketbase';
-import { from, Observable, of } from 'rxjs';
+import { from, Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { USUARIOS } from './constantes/colecoes';
 import { ListaResponse } from './models/lista-respone';

@@ -30,29 +30,7 @@
     <div class="flex-fill">
         <div class="grid-cards px-3">
             @for (item of itens(); track item.id) {
-            <mat-card class="card-item" appearance="outlined">
-                <mat-card-header>
-                    <div mat-card-avatar class="example-header-image">
-                        <mat-icon class="text-success">check</mat-icon>
-                    </div>
-                    <mat-card-title>{{ item.titulo }}</mat-card-title>
-                </mat-card-header>
-                <hr>
-                <mat-card-content>
-                    <!-- <p class="text-descricao border rounded shadow-sm p-3"> {{ item.descricao }}</p> -->
-                    <div>
-                        <app-tags [tagsInfo]="item.tag"></app-tags>
-                    </div>
 
-                </mat-card-content>
-
-                <mat-card-actions [align]="'end'">
-                    <button matButton (click)="ver(item)">VER</button>
-                    <button matButton (click)="editar(item)">EDITAR</button>
-                    <button matButton (click)="excluir(item)">EXCLUIR</button>
-                </mat-card-actions>
-
-            </mat-card>
             } @empty {
             <div class="empty-state">
                 <mat-icon>inbox</mat-icon>

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
@@ -30,6 +30,8 @@ export class Layout {
   private readonly service = inject(AnotacaoService);
   private readonly mensagem = inject(MensagemService);
   private readonly seguranca = inject(SegurancaService);
+
+  logado = signal(this.seguranca.logado);
 
   novo() {
     this.dialog

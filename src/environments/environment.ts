@@ -1,5 +1,5 @@
 export const environment = {
-  api: '/api',
+  api: 'https://pocketbase.gilmariosoftware.com.br',
   usuario: '',
   senha: '',
 };
