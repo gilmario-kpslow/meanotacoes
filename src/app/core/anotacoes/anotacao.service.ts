@@ -2,6 +2,9 @@ import { EventEmitter, inject, Injectable } from '@angular/core';
 import { PocketbaseService } from '../pocketbase';
 import { ANOTACOES } from '../constantes/colecoes';
 import { SegurancaService } from '../seguranca/seguranca.service';
+import { Observable } from 'rxjs';
+import { ListaResponse } from '../models/lista-respone';
+import { Anotacao } from '../models/anotacao';
 
 @Injectable()
 export class AnotacaoService {
@@ -16,7 +19,12 @@ export class AnotacaoService {
   }
 
   listar(page?: number, perPage?: number, titulo: string = '', tag: string = '') {
-    return this.pocketbase.listar(ANOTACOES, page, perPage, `titulo~"${titulo}"&&tag~"${tag}"`);
+    return this.pocketbase.listar(
+      ANOTACOES,
+      page,
+      perPage,
+      `titulo~"${titulo}"&&tag~"${tag}"`,
+    ) as Observable<ListaResponse<Anotacao>>;
   }
 
   salvar(anotacao: any) {

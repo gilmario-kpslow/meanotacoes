@@ -1,5 +1,7 @@
 <div class="d-flex flex-column h-100">
-    <mat-toolbar class="border mb-3">
+    <mat-toolbar class="border mb-3  py-3">
+        @if(logado()) {
+
         <button matIconButton class="example-icon" [matMenuTriggerFor]="anotacao"
             aria-label="Example icon-button with menu icon">
             <mat-icon>notes</mat-icon>
@@ -12,8 +14,11 @@
                 <mat-icon>refresh</mat-icon> Atualizar
             </button>
         </mat-menu>
+        }
         <h2 routerLink="/" class="cursor" style="cursor: pointer;">ANOTAÇÕES</h2>
         <span class="example-spacer"></span>
+        @if(logado()) {
+
         <button matIconButton class="example-icon favorite-icon text-success"
             aria-label="Example icon-button with heart icon" [matMenuTriggerFor]="usuario">
             <mat-icon>person</mat-icon>
@@ -27,6 +32,12 @@
                 <mat-icon>power_settings_new</mat-icon> Sair
             </button>
         </mat-menu>
+        } @else {
+        <button matButton routerLink="/login" class="example-icon favorite-icon text-success"
+            aria-label="Example icon-button with heart icon">
+            Entrar <mat-icon>login</mat-icon>
+        </button>
+        }
     </mat-toolbar>
     <div class=" flex-fill">
         <router-outlet />

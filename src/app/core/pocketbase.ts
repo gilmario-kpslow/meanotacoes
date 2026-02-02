@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import PocketBase from 'pocketbase';
-import { from, of } from 'rxjs';
+import { from } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { USUARIOS } from './constantes/colecoes';
 

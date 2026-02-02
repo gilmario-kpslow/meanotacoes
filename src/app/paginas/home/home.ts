@@ -26,7 +26,8 @@ import { VerCard } from '../../compartilhado/ver-card/ver-card';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { SegurancaService } from '../../core/seguranca/seguranca.service';
-import { FormBuilder, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { Anotacao } from '../../core/models/anotacao';
 
 @Component({
   selector: 'app-home',
@@ -49,7 +50,7 @@ import { FormBuilder, FormControl, ReactiveFormsModule } from '@angular/forms';
 })
 export class Home implements AfterViewInit {
   private readonly service = inject(AnotacaoService);
-  listaResponse: ListaResponse<any> = {
+  listaResponse: ListaResponse<Anotacao> = {
     items: [],
     page: 0,
     perPage: 0,
@@ -93,7 +94,7 @@ export class Home implements AfterViewInit {
         (this.paginador?.pageIndex || 0) + 1,
         this.paginador?.pageSize,
         this.titulo.value,
-        tags
+        tags,
       )
       .subscribe((l) => {
         this.listaResponse = l;

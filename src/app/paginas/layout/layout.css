@@ -33,7 +33,9 @@
   flex-direction: column;
   height: 100%;
   /* Garante altura igual para cards na mesma linha */
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
 }
 
 .card-item:hover {
