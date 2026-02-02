@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import PocketBase from 'pocketbase';
-import { from, of } from 'rxjs';
+import { from, Observable, of } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { USUARIOS } from './constantes/colecoes';
+import { ListaResponse } from './models/lista-respone';
 
 @Injectable({ providedIn: 'root' })
 export class PocketbaseService {
@@ -16,7 +17,7 @@ export class PocketbaseService {
     return from(this.client.collection(USUARIOS).authWithPassword(req.username, req.password));
   }
 
-  listar(colecao: string, page?: number, perPage?: number, filter?: string) {
+  listar(colecao: string, page?: number, perPage?: number, filter?: string): Observable<ListaResponse<any>> {
     return from(this.client.collection(colecao).getList(page, perPage, { filter }));
   }
 
