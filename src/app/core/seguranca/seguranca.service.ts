@@ -1,7 +1,6 @@
-import { inject, Injectable } from "@angular/core";
-import { CanActivate, Router } from "@angular/router";
-import { RecordAuthResponse, RecordModel } from "pocketbase";
-import { HOME, LOGIN } from "../constantes/routas";
+import { inject, Injectable, signal } from "@angular/core";
+import { Router } from "@angular/router";
+import { LOGIN } from "../constantes/routas";
 import { UsuarioLogado } from "./usuario.logado";
 import { PocketbaseService } from "../pocketbase";
 
@@ -11,6 +10,7 @@ export class SegurancaService {
     private usuario?: UsuarioLogado;
     private readonly router = inject(Router);
     private readonly pocketbase = inject(PocketbaseService);
+    logado = signal(false);
 
     constructor() {
         if (this.tokenValido()) {
@@ -23,18 +23,20 @@ export class SegurancaService {
 
     logar(user: UsuarioLogado) {
         this.usuario = user;
+
+        this.logado.set(true);
+
         this.router.navigate(['/']);
     }
 
     logout() {
+        this.logado.set(false);
         this.usuario = undefined;
-        this.router.navigate(['/', LOGIN]);
         this.pocketbase.authStore().clear();
+        this.router.navigate(['/']);
     }
 
-    get logado() {
-        return this.usuario != undefined && this.tokenValido();
-    }
+
 
     tokenValido(): boolean {
         return this.pocketbase.authStore().isValid;

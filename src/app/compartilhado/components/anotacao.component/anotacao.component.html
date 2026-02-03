@@ -3,21 +3,23 @@
         <div mat-card-avatar class="example-header-image">
             <mat-icon class="text-success">check</mat-icon>
         </div>
-        <mat-card-title>{{ item.titulo }}</mat-card-title>
+        <mat-card-title>{{ item().titulo }}</mat-card-title>
     </mat-card-header>
     <hr>
     <mat-card-content>
         <!-- <p class="text-descricao border rounded shadow-sm p-3"> {{ item.descricao }}</p> -->
         <div>
-            <app-tags [tagsInfo]="item.tag"></app-tags>
+            <app-tags [tagsInfo]="item().tag"></app-tags>
         </div>
 
     </mat-card-content>
 
     <mat-card-actions [align]="'end'">
-        <button matButton (click)="ver(item)">VER</button>
-        <button matButton (click)="editar(item)">EDITAR</button>
-        <button matButton (click)="excluir(item)">EXCLUIR</button>
+        <button matButton (click)="ver()">VER</button>
+        @if(logado()) {
+        <button matButton (click)="editar()">EDITAR</button>
+        <button matButton (click)="excluir()">EXCLUIR</button>
+        }
     </mat-card-actions>
 
 </mat-card>

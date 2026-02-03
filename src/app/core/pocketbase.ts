@@ -1,16 +1,28 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import PocketBase from 'pocketbase';
 import { from, Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { USUARIOS } from './constantes/colecoes';
 import { ListaResponse } from './models/lista-respone';
+import { loadInterceptor } from './loader/loader.interceptor';
+import { LoadService } from './loader/load.service';
 
 @Injectable({ providedIn: 'root' })
 export class PocketbaseService {
   private readonly client: PocketBase;
+  private readonly loader = inject(LoadService);
 
   constructor() {
     this.client = new PocketBase(environment.api);
+    this.client.afterSend = (response, data) => {
+      this.loader.hide();
+      return data
+    }
+
+    this.client.beforeSend = (url, options) => {
+      this.loader.show();
+      return { url, options };
+    }
   }
 
   login(req: any) {

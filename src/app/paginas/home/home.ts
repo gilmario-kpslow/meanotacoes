@@ -1,6 +1,7 @@
 import {
   AfterViewInit,
   Component,
+  effect,
   inject,
   OnInit,
   signal,
@@ -28,6 +29,9 @@ import { MatMenuModule } from '@angular/material/menu';
 import { SegurancaService } from '../../core/seguranca/seguranca.service';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Anotacao } from '../../core/models/anotacao';
+import { AnotacaoPublicaService } from '../../core/anotacoes/anotacao-publica.service';
+import { AnotacaoComponent } from '../../compartilhado/components/anotacao.component/anotacao.component';
+import { AnotacaoPublica } from '../../core/models/anotacao-publica';
 
 @Component({
   selector: 'app-home',
@@ -38,19 +42,21 @@ import { Anotacao } from '../../core/models/anotacao';
     CommonModule,
     MatInputModule,
     MatChipsModule,
-    TagsComponent,
     MatPaginatorModule,
     MatToolbarModule,
     MatMenuModule,
     ReactiveFormsModule,
+    AnotacaoComponent
   ],
-  providers: [AnotacaoService, { provide: MatPaginatorIntl, useClass: PaginadorDefault }],
+  providers: [AnotacaoService, AnotacaoPublicaService, { provide: MatPaginatorIntl, useClass: PaginadorDefault }],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
 export class Home implements AfterViewInit {
   private readonly service = inject(AnotacaoService);
-  listaResponse: ListaResponse<Anotacao> = {
+  private readonly servicePublica = inject(AnotacaoPublicaService);
+
+  listaResponse: ListaResponse<Anotacao | AnotacaoPublica> = {
     items: [],
     page: 0,
     perPage: 0,
@@ -62,12 +68,20 @@ export class Home implements AfterViewInit {
   private readonly seguranca = inject(SegurancaService);
   readonly keywords = signal([] as string[]);
 
+  logado = this.seguranca.logado;
+
   titulo = inject(FormBuilder).nonNullable.control('');
 
   @ViewChild('paginador') paginador?: MatPaginator;
 
+
+  constructor() {
+    effect(() => {
+      this.listar();
+    });
+  }
+
   ngAfterViewInit(): void {
-    this.listar();
     this.service.update.subscribe(() => {
       this.buscar();
     });
@@ -75,6 +89,7 @@ export class Home implements AfterViewInit {
     this.titulo.valueChanges.subscribe((v) => {
       this.buscar();
     });
+
   }
 
   buscar() {
@@ -89,72 +104,31 @@ export class Home implements AfterViewInit {
     if (this.keywords().length > 0) {
       tags = this.keywords().reduce((a, b) => `${a},${b}`);
     }
-    this.service
-      .listar(
-        (this.paginador?.pageIndex || 0) + 1,
+    if (this.logado()) {
+      this.service
+        .listar(
+          (this.paginador?.pageIndex || 0) + 1,
+          this.paginador?.pageSize,
+          this.titulo.value,
+          tags,
+        )
+        .subscribe((l) => {
+          this.listaResponse = l;
+          console.log('OK', l)
+        });
+    } else {
+      this.servicePublica.listar((
+        this.paginador?.pageIndex || 0) + 1,
         this.paginador?.pageSize,
         this.titulo.value,
-        tags,
-      )
-      .subscribe((l) => {
-        this.listaResponse = l;
-      });
+        tags).subscribe((l) => {
+          this.listaResponse = l;
+        });
+    }
   }
 
   itens() {
     return this.listaResponse.items;
-  }
-
-  editar(registro: any) {
-    this.dialog
-      .open(Novo, {
-        width: '500px',
-        disableClose: true,
-        data: registro,
-      })
-      .afterClosed()
-      .subscribe((result) => {
-        if (result) {
-          this.adicionarNovoItem(result);
-        }
-      });
-  }
-
-  ver(registro: any) {
-    this.dialog.open(VerCard, {
-      width: '500px',
-      data: registro,
-    });
-  }
-
-  adicionarNovoItem(result: any) {
-    this.service.salvar(result).subscribe((resp) => {
-      this.mensagem.sucesso('Registro salvo', 'OK', 'OK', () => {
-        console.log('Fim');
-      });
-    });
-  }
-
-  excluir(record: any) {
-    this.dialog
-      .open(Excluir, {
-        width: '500px',
-        disableClose: true,
-        data: {
-          mensagem: `Excluir a anotação ${record.titulo}?`,
-          titulo: 'Exluir registro?',
-        },
-      })
-      .afterClosed()
-      .subscribe((result) => {
-        if (result) {
-          this.service.excluir(record.id).subscribe(() => {
-            this.mensagem.error('Registro excluído!', 'OK', 'OK', () => {
-              console.log('Fim');
-            });
-          });
-        }
-      });
   }
 
   paginar(event: any) {
@@ -166,12 +140,6 @@ export class Home implements AfterViewInit {
       .open(Novo, {
         width: '500px',
         disableClose: true,
-      })
-      .afterClosed()
-      .subscribe((result) => {
-        if (result) {
-          this.adicionarNovoItem(result);
-        }
       });
   }
 

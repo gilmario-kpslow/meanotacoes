@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { HOME, LOGIN, PERFIL, PUBLICA } from './core/constantes/routas';
+import { HOME, LOGIN, PERFIL } from './core/constantes/routas';
 import { AuthGuard } from './core/seguranca/auth.guard';
 
 export const routes: Routes = [
@@ -8,14 +8,8 @@ export const routes: Routes = [
     loadComponent: () => import('./paginas/layout/layout').then((a) => a.Layout),
     children: [
       {
-        path: PUBLICA,
-        loadComponent: () =>
-          import('./paginas/pagina-publica/pagina-publica').then((a) => a.PaginaPublica),
-      },
-      {
         path: HOME,
-        loadComponent: () => import('./paginas/home/home').then((a) => a.Home),
-        canActivate: [AuthGuard],
+        loadComponent: () => import('./paginas/home/home').then((a) => a.Home)
       },
       {
         path: PERFIL,

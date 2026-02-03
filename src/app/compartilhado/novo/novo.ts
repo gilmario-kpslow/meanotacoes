@@ -13,6 +13,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
 import { CommonModule } from '@angular/common';
+import { AnotacaoService } from '../../core/anotacoes/anotacao.service';
+import { MensagemService } from '../components/mensagens/messagem.service';
 
 @Component({
   selector: 'app-novo',
@@ -26,6 +28,7 @@ import { CommonModule } from '@angular/common';
     MatChipsModule,
     CommonModule,
   ],
+  providers: [AnotacaoService],
   templateUrl: './novo.html',
   styleUrl: './novo.css',
 })
@@ -34,6 +37,8 @@ export class Novo implements OnInit {
   public dialogRef = inject(MatDialogRef<Novo>);
   readonly keywords = signal([] as string[]);
   private readonly data = inject<any>(MAT_DIALOG_DATA);
+  private readonly service = inject(AnotacaoService);
+  private readonly mensagem = inject(MensagemService);
 
   cadastroForm = this.fb.group({
     id: [],
@@ -55,7 +60,10 @@ export class Novo implements OnInit {
 
   onSalvar(): void {
     if (this.cadastroForm.valid) {
-      this.dialogRef.close(this.cadastroForm.value);
+      this.service.salvar(this.cadastroForm.value).subscribe((resp) => {
+        this.dialogRef.close(resp);
+        this.mensagem.sucesso('Registro salvo', 'OK', 'OK');
+      });
     }
   }
 

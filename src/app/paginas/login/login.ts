@@ -1,4 +1,4 @@
-import { Component, Inject, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -9,9 +9,8 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { InputContent } from '../../compartilhado/diretivas/input-content';
 import { SegurancaService } from '../../core/seguranca/seguranca.service';
-import { PocketbaseService } from '../../core/pocketbase';
 import { environment } from '../../../environments/environment';
-import { CriptoService } from '../../core/seguranca/cripto.service';
+
 
 @Component({
   selector: 'app-login',
@@ -38,15 +37,13 @@ export class Login {
   fb: FormBuilder = inject(FormBuilder);
   segurancaService: SegurancaService = inject(SegurancaService);
 
-  // criptoService = inject(CriptoService);
-
   constructor() {
     this.form = this.fb.group({
       username: this.fb.nonNullable.control(environment.usuario, [Validators.required]),
       password: this.fb.nonNullable.control(environment.senha, [Validators.required]),
     });
 
-    if (this.segurancaService.logado) {
+    if (this.segurancaService.logado()) {
       this.router.navigate(['/']);
     }
   }
@@ -61,14 +58,5 @@ export class Login {
     });
   }
 
-  // async testeCripto() {
-  //   // this.criptoService.exemplo();
-  //   this.criptoService.criptografar('texte Exemplo', '123456').then((resp) => {
-  //     console.log(resp);
-  //   });
-  // }
 
-  // async testeCripto2() {
-  //   this.criptoService.exemplo2();
-  // }
 }

@@ -25,3 +25,7 @@ body {
   gap: 1.5rem;
   margin-top: 30px;
 }
+
+.mono {
+  font-family: 'Courier New', monospace !important;
+}

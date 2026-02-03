@@ -12,8 +12,8 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     { provide: ErrorHandler, useClass: AppErrorHandler },
     AuthGuard, provideServiceWorker('ngsw-worker.js', {
-            enabled: !isDevMode(),
-            registrationStrategy: 'registerWhenStable:30000'
-          })
+      enabled: !isDevMode(),
+      registrationStrategy: 'registerWhenStable:30000'
+    })
   ]
 };

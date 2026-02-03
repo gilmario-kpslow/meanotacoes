@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="250"
+   height="250"
+   viewBox="0 0 66.145826 66.145826"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.3 (0d15f75042, 2025-12-25)"
+   sodipodi:docname="logo-anotacoes.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     inkscape:zoom="2.0233293"
+     inkscape:cx="142.58677"
+     inkscape:cy="115.89809"
+     inkscape:window-width="1920"
+     inkscape:window-height="1011"
+     inkscape:window-x="0"
+     inkscape:window-y="32"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Camada 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#800000;stroke-width:0.3269"
+       id="rect2"
+       width="8.314827"
+       height="57.300186"
+       x="16.90111"
+       y="2.9858551"
+       ry="3.6863852" />
+    <rect
+       style="fill:#008000;stroke-width:0.24804"
+       id="rect4"
+       width="42.827168"
+       height="7.472219"
+       x="8.4961729"
+       y="27.484392"
+       ry="2.6242065" />
+    <rect
+       style="fill:#800080;stroke-width:0.372996"
+       id="rect3"
+       width="7.6030941"
+       height="64.364792"
+       x="9.8540487"
+       y="14.724572"
+       ry="2.311801"
+       transform="rotate(-33.509818)" />
+  </g>
+</svg>
