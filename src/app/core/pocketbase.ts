@@ -1,10 +1,9 @@
 import { inject, Injectable } from '@angular/core';
 import PocketBase from 'pocketbase';
-import { from, Observable } from 'rxjs';
+import { finalize, from, Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { USUARIOS } from './constantes/colecoes';
 import { ListaResponse } from './models/lista-respone';
-import { loadInterceptor } from './loader/loader.interceptor';
 import { LoadService } from './loader/load.service';
 
 @Injectable({ providedIn: 'root' })
@@ -16,33 +15,46 @@ export class PocketbaseService {
     this.client = new PocketBase(environment.api);
     this.client.afterSend = (response, data) => {
       this.loader.hide();
-      return data
-    }
+      return data;
+    };
 
     this.client.beforeSend = (url, options) => {
       this.loader.show();
       return { url, options };
-    }
+    };
   }
 
   login(req: any) {
-    return from(this.client.collection(USUARIOS).authWithPassword(req.username, req.password));
+    return from(this.client.collection(USUARIOS).authWithPassword(req.username, req.password)).pipe(
+      finalize(() => this.loader.hide()),
+    );
   }
 
-  listar(colecao: string, page?: number, perPage?: number, filter?: string): Observable<ListaResponse<any>> {
-    return from(this.client.collection(colecao).getList(page, perPage, { filter }));
+  listar(
+    colecao: string,
+    page?: number,
+    perPage?: number,
+    filter?: string,
+  ): Observable<ListaResponse<any>> {
+    return from(this.client.collection(colecao).getList(page, perPage, { filter })).pipe(
+      finalize(() => this.loader.hide()),
+    );
   }
 
   getError(response: Response, data: any): any {
-    console.log(response.status);
+    console.log('ERROR', response.status);
   }
 
   create(colecao: string, record: any) {
-    return from(this.client.collection(colecao).create(record));
+    return from(this.client.collection(colecao).create(record)).pipe(
+      finalize(() => this.loader.hide()),
+    );
   }
 
   notificar(colecao: string, fn: (e: any) => void) {
-    return from(this.client.collection(colecao).subscribe('*', fn));
+    return from(this.client.collection(colecao).subscribe('*', fn)).pipe(
+      finalize(() => this.loader.hide()),
+    );
   }
 
   authStore() {
@@ -50,10 +62,14 @@ export class PocketbaseService {
   }
 
   editar(colecao: string, record: any) {
-    return from(this.client.collection(colecao).update(record.id, record));
+    return from(this.client.collection(colecao).update(record.id, record)).pipe(
+      finalize(() => this.loader.hide()),
+    );
   }
 
   excluir(colecao: string, id: string) {
-    return from(this.client.collection(colecao).delete(id));
+    return from(this.client.collection(colecao).delete(id)).pipe(
+      finalize(() => this.loader.hide()),
+    );
   }
 }

@@ -10,6 +10,9 @@ import { Novo } from '../../compartilhado/novo/novo';
 import { AnotacaoService } from '../../core/anotacoes/anotacao.service';
 import { SegurancaService } from '../../core/seguranca/seguranca.service';
 import { MensagemService } from '../../compartilhado/components/mensagens/messagem.service';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { LoadService } from '../../core/loader/load.service';
 
 @Component({
   selector: 'app-layout',
@@ -20,6 +23,7 @@ import { MensagemService } from '../../compartilhado/components/mensagens/messag
     CommonModule,
     MatToolbarModule,
     MatMenuModule,
+    MatProgressBarModule,
   ],
   templateUrl: './layout.html',
   styleUrl: './layout.css',
@@ -30,8 +34,10 @@ export class Layout {
   private readonly service = inject(AnotacaoService);
   private readonly mensagem = inject(MensagemService);
   private readonly seguranca = inject(SegurancaService);
+  private readonly loaderService = inject(LoadService);
 
   logado = this.seguranca.logado;
+  load = this.loaderService.loading;
 
   novo() {
     this.dialog
@@ -53,9 +59,9 @@ export class Layout {
 
   adicionarNovoItem(result: any) {
     this.service.salvar(result).subscribe((resp) => {
-      this.mensagem.sucesso('Registro salvo', 'OK', 'OK', () => { });
+      this.mensagem.sucesso('Registro salvo', 'OK', 'OK', () => {});
     });
   }
 
-  buscar() { }
+  buscar() {}
 }

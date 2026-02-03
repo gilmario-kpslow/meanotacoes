@@ -11,9 +11,9 @@ export class AnotacaoPublicaService {
   update = new EventEmitter();
 
   constructor() {
-    this.pocketbase.notificar(ANOTACOES_PUBLICAS, () => {
-      this.update.emit();
-    });
+    // this.pocketbase.notificar(ANOTACOES_PUBLICAS, () => {
+    //   this.update.emit();
+    // });
   }
 
   listar(page?: number, perPage?: number, titulo: string = '', tag: string = '') {
