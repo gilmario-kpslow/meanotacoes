@@ -46,9 +46,13 @@ import { AnotacaoPublica } from '../../core/models/anotacao-publica';
     MatToolbarModule,
     MatMenuModule,
     ReactiveFormsModule,
-    AnotacaoComponent
+    AnotacaoComponent,
   ],
-  providers: [AnotacaoService, AnotacaoPublicaService, { provide: MatPaginatorIntl, useClass: PaginadorDefault }],
+  providers: [
+    AnotacaoService,
+    AnotacaoPublicaService,
+    { provide: MatPaginatorIntl, useClass: PaginadorDefault },
+  ],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
@@ -74,7 +78,6 @@ export class Home implements AfterViewInit {
 
   @ViewChild('paginador') paginador?: MatPaginator;
 
-
   constructor() {
     effect(() => {
       this.listar();
@@ -89,7 +92,6 @@ export class Home implements AfterViewInit {
     this.titulo.valueChanges.subscribe((v) => {
       this.buscar();
     });
-
   }
 
   buscar() {
@@ -105,7 +107,21 @@ export class Home implements AfterViewInit {
       tags = this.keywords().reduce((a, b) => `${a},${b}`);
     }
     if (this.logado()) {
+      console.log(this.paginador?.pageSize);
+
       this.service
+        .listar(
+          (this.paginador?.pageIndex || 0) + 1,
+          this.paginador?.pageSize || 8,
+          this.titulo.value,
+          tags,
+        )
+        .subscribe((l) => {
+          this.listaResponse = l;
+          console.log('OK', l);
+        });
+    } else {
+      this.servicePublica
         .listar(
           (this.paginador?.pageIndex || 0) + 1,
           this.paginador?.pageSize,
@@ -113,15 +129,6 @@ export class Home implements AfterViewInit {
           tags,
         )
         .subscribe((l) => {
-          this.listaResponse = l;
-          console.log('OK', l)
-        });
-    } else {
-      this.servicePublica.listar((
-        this.paginador?.pageIndex || 0) + 1,
-        this.paginador?.pageSize,
-        this.titulo.value,
-        tags).subscribe((l) => {
           this.listaResponse = l;
         });
     }
@@ -136,11 +143,10 @@ export class Home implements AfterViewInit {
   }
 
   novo() {
-    this.dialog
-      .open(Novo, {
-        width: '500px',
-        disableClose: true,
-      });
+    this.dialog.open(Novo, {
+      width: '500px',
+      disableClose: true,
+    });
   }
 
   removeKeyword(keyword: string) {

@@ -13,6 +13,7 @@ export class PocketbaseService {
 
   constructor() {
     this.client = new PocketBase(environment.api);
+    this.client.autoCancellation(true);
     this.client.afterSend = (response, data) => {
       this.loader.hide();
       return data;
