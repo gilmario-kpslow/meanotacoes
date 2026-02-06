@@ -13,7 +13,7 @@ export class PocketbaseService {
 
   constructor() {
     this.client = new PocketBase(environment.api);
-    this.client.autoCancellation(true);
+    this.client.autoCancellation(false);
     this.client.afterSend = (response, data) => {
       this.loader.hide();
       return data;
@@ -23,12 +23,18 @@ export class PocketbaseService {
       this.loader.show();
       return { url, options };
     };
+
   }
 
   login(req: any) {
-    return from(this.client.collection(USUARIOS).authWithPassword(req.username, req.password)).pipe(
-      finalize(() => this.loader.hide()),
-    );
+    try {
+      return from(this.client.collection(USUARIOS).authWithPassword(req.username, req.password)).pipe(
+        finalize(() => this.loader.hide())
+      );
+    } catch (e) {
+      console.log(e);
+      throw e;
+    }
   }
 
   listar(
@@ -43,7 +49,7 @@ export class PocketbaseService {
   }
 
   getError(response: Response, data: any): any {
-    console.log('ERROR', response.status);
+    console.log('ERROR => ', response.status);
   }
 
   create(colecao: string, record: any) {

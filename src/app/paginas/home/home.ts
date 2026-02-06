@@ -107,8 +107,6 @@ export class Home implements AfterViewInit {
       tags = this.keywords().reduce((a, b) => `${a},${b}`);
     }
     if (this.logado()) {
-      console.log(this.paginador?.pageSize);
-
       this.service
         .listar(
           (this.paginador?.pageIndex || 0) + 1,
@@ -118,7 +116,6 @@ export class Home implements AfterViewInit {
         )
         .subscribe((l) => {
           this.listaResponse = l;
-          console.log('OK', l);
         });
     } else {
       this.servicePublica

@@ -10,6 +10,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { InputContent } from '../../compartilhado/diretivas/input-content';
 import { SegurancaService } from '../../core/seguranca/seguranca.service';
 import { environment } from '../../../environments/environment';
+import { finalize, throwError } from 'rxjs';
+import { MensagemService } from '../../compartilhado/components/mensagens/messagem.service';
 
 
 @Component({
@@ -33,6 +35,7 @@ export class Login {
 
   loginService: LoginService = inject(LoginService);
   router: Router = inject(Router);
+  notificador = inject(MensagemService);
 
   fb: FormBuilder = inject(FormBuilder);
   segurancaService: SegurancaService = inject(SegurancaService);
@@ -53,8 +56,14 @@ export class Login {
       this.form.markAllAsTouched();
       return;
     }
-    this.loginService.login(this.form.value).subscribe((resp) => {
-      this.segurancaService.logar(resp);
+    this.loginService.login(this.form.value).subscribe({
+      next: (value) => {
+        this.segurancaService.logar(value);
+      },
+      error: (error) => {
+        console.log(error)
+        this.notificador.error("Usuário ou senha incorreta.");
+      }
     });
   }
 

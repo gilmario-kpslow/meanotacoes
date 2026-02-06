@@ -15,6 +15,7 @@ import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
 import { CommonModule } from '@angular/common';
 import { AnotacaoService } from '../../core/anotacoes/anotacao.service';
 import { MensagemService } from '../components/mensagens/messagem.service';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-novo',
@@ -27,6 +28,7 @@ import { MensagemService } from '../components/mensagens/messagem.service';
     MatIconModule,
     MatChipsModule,
     CommonModule,
+    MatSlideToggleModule
   ],
   providers: [AnotacaoService],
   templateUrl: './novo.html',
@@ -45,6 +47,7 @@ export class Novo implements OnInit {
     titulo: ['', Validators.required],
     descricao: [''],
     tag: [''],
+    publica: [false]
   });
 
   ngOnInit(): void {

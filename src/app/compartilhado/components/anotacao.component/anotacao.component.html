@@ -1,17 +1,17 @@
 <mat-card class="card-item" appearance="outlined">
     <mat-card-header>
-        <div mat-card-avatar class="example-header-image">
-            <mat-icon class="text-success">check</mat-icon>
+        <div class="d-flex">
+            <div class="mr-3">
+                <mat-icon class="text-success">check</mat-icon>
+            </div>
+            <mat-card-title>{{ item().titulo }}</mat-card-title>
         </div>
-        <mat-card-title>{{ item().titulo }}</mat-card-title>
     </mat-card-header>
     <hr>
     <mat-card-content>
-        <!-- <p class="text-descricao border rounded shadow-sm p-3"> {{ item.descricao }}</p> -->
         <div>
             <app-tags [tagsInfo]="item().tag"></app-tags>
         </div>
-
     </mat-card-content>
 
     <mat-card-actions [align]="'end'">

@@ -30,18 +30,14 @@
             </mat-chip-grid>
             <input placeholder="New keyword..." [matChipInputFor]="chipGrid" (matChipInputTokenEnd)="add($event)" />
         </mat-form-field>
-        <!-- <mat-form-field appearance="outline" class="full-width">
-            <mat-label>TAG</mat-label>
-            <input matInput [formControl]="tagInput" (keyup.enter)="addTag()">
-        </mat-form-field> -->
 
         <mat-form-field appearance="outline" class="full-width">
             <mat-label>Descrição</mat-label>
             <textarea matInput formControlName="descricao" class="font-monospace" rows="4"></textarea>
         </mat-form-field>
-
-
-
+        <mat-slide-toggle formControlName="publica">
+            Exibir publicamente?
+        </mat-slide-toggle>
     </form>
 </mat-dialog-content>
 

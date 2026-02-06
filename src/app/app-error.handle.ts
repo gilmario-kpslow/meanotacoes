@@ -21,9 +21,14 @@ export class AppErrorHandler extends ErrorHandler {
     if (errorResponse instanceof HttpErrorResponse) {
       const error = errorResponse.error ? errorResponse.error : undefined;
       this.zone.run(() => {
+        console.log('Error handle => ', error.mensagem)
         switch (errorResponse.status) {
           case 0:
             this.notificador.error('O Servidor não respondeu. A api parece indisponível no momento.');
+            break;
+          case 400:
+            this.notificador.atencao(error.mensagem);
+
             break;
           case 401:
             this.router.navigate(['/auth']);
