@@ -10,7 +10,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { InputContent } from '../../compartilhado/diretivas/input-content';
 import { SegurancaService } from '../../core/seguranca/seguranca.service';
 import { environment } from '../../../environments/environment';
-import { finalize, throwError } from 'rxjs';
 import { MensagemService } from '../../compartilhado/components/mensagens/messagem.service';
 
 

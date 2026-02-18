@@ -54,7 +54,9 @@
     <div class="d-flex justify-content-end float-end p-3 position-fixed  bottom-0 end-0" style="z-index: 999999;">
         <button class="mx-3 d-block d-sm-none" matFab (click)="voltar()"><mat-icon>arrow_left</mat-icon></button>
         <button class="mr-3 d-block d-sm-none" matFab (click)="proximo()"><mat-icon>arrow_right</mat-icon></button>
+        @if(logado()) {
         <button class="mx-3" matFab (click)="novo()"><mat-icon>add</mat-icon></button>
+        }
         <button matFab (click)="buscar()"><mat-icon>refresh</mat-icon></button>
     </div>
 

@@ -33,7 +33,7 @@ export class AnotacaoComponent {
   editar() {
     this.dialog
       .open(Novo, {
-        width: '500px',
+        width: '800px',
         disableClose: true,
         data: this.item(),
       });
@@ -41,7 +41,7 @@ export class AnotacaoComponent {
 
   ver() {
     this.dialog.open(VerCard, {
-      width: '500px',
+      width: '800px',
       data: this.item(),
     });
   }

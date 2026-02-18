@@ -141,7 +141,7 @@ export class Home implements AfterViewInit {
 
   novo() {
     this.dialog.open(Novo, {
-      width: '500px',
+      width: '800px',
       disableClose: true,
     });
   }

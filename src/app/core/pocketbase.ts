@@ -13,7 +13,7 @@ export class PocketbaseService {
 
   constructor() {
     this.client = new PocketBase(environment.api);
-    this.client.autoCancellation(false);
+    this.client.autoCancellation(true);
     this.client.afterSend = (response, data) => {
       this.loader.hide();
       return data;
@@ -28,9 +28,9 @@ export class PocketbaseService {
 
   login(req: any) {
     try {
-      return from(this.client.collection(USUARIOS).authWithPassword(req.username, req.password)).pipe(
-        finalize(() => this.loader.hide())
-      );
+      return from(this.client.collection(USUARIOS)
+        .authWithPassword(req.username, req.password))
+        .pipe(finalize(() => this.loader.hide()));
     } catch (e) {
       console.log(e);
       throw e;

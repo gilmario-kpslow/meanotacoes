@@ -41,7 +41,10 @@
             </div>
           </mat-card-content>
           <mat-card-actions>
-            <button mat-raised-button color="primary" (click)="login()" class="w-100" type="button">Logar</button>
+            <div class="d-flex flex-column w-100">
+              <button mat-raised-button color="primary" (click)="login()" class="w-100" type="button">Logar</button>
+              <a routerLink="/" class="p-2"> Voltar </a>
+            </div>
           </mat-card-actions>
         </mat-card>
       </div>
