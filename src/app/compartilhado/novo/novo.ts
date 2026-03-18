@@ -12,7 +12,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
-import { CommonModule } from '@angular/common';
+
 import { AnotacaoService } from '../../core/anotacoes/anotacao.service';
 import { MensagemService } from '../components/mensagens/messagem.service';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
@@ -27,9 +27,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatFormFieldModule,
     MatIconModule,
     MatChipsModule,
-    CommonModule,
     MatSlideToggleModule
-  ],
+],
   providers: [AnotacaoService],
   templateUrl: './novo.html',
   styleUrl: './novo.css',

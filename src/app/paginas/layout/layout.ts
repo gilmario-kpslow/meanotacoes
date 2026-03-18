@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
@@ -20,11 +20,10 @@ import { LoadService } from '../../core/loader/load.service';
     RouterModule,
     MatButtonModule,
     MatIconModule,
-    CommonModule,
     MatToolbarModule,
     MatMenuModule,
-    MatProgressBarModule,
-  ],
+    MatProgressBarModule
+],
   templateUrl: './layout.html',
   styleUrl: './layout.css',
   providers: [AnotacaoService],

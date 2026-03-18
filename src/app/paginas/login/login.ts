@@ -5,7 +5,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { LoginService } from './login.service';
 import { Router, RouterModule } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
-import { CommonModule } from '@angular/common';
+
 import { MatButtonModule } from '@angular/material/button';
 import { InputContent } from '../../compartilhado/diretivas/input-content';
 import { SegurancaService } from '../../core/seguranca/seguranca.service';
@@ -22,9 +22,8 @@ import { MensagemService } from '../../compartilhado/components/mensagens/messag
     MatInputModule,
     MatButtonModule,
     InputContent,
-    RouterModule,
-    CommonModule,
-  ],
+    RouterModule
+],
   templateUrl: './login.html',
   styleUrl: './login.css',
   providers: [LoginService],

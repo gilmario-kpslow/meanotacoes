@@ -9,7 +9,7 @@ import {
   viewChild,
 } from '@angular/core';
 import { AnotacaoService } from '../../core/anotacoes/anotacao.service';
-import { CommonModule } from '@angular/common';
+
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -39,15 +39,14 @@ import { AnotacaoPublica } from '../../core/models/anotacao-publica';
     MatCardModule,
     MatButtonModule,
     MatIconModule,
-    CommonModule,
     MatInputModule,
     MatChipsModule,
     MatPaginatorModule,
     MatToolbarModule,
     MatMenuModule,
     ReactiveFormsModule,
-    AnotacaoComponent,
-  ],
+    AnotacaoComponent
+],
   providers: [
     AnotacaoService,
     AnotacaoPublicaService,
