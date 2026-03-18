@@ -1,0 +1,15 @@
+.fs-7 {
+    font-size: 9pt;
+    align-content: center;
+}
+
+.text-descricao {
+    white-space: pre-line;
+    overflow: scroll;
+    height: 100px;
+}
+
+.mensagens {
+    overflow: scroll;
+    height: 80vh;
+}

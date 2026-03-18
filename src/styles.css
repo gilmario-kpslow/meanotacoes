@@ -1,5 +1,3 @@
-/* You can add global styles to this file, and also import other style files */
-
 html,
 body {
   height: 100vh;
@@ -18,9 +16,6 @@ body {
 
 .grid-cards {
   display: grid;
-  /* Cria colunas responsivas:
-     Mínimo de 300px, preenchendo o espaço restante (1fr)
-  */
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 1.5rem;
   margin-top: 30px;

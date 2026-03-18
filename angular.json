@@ -26,7 +26,6 @@
             ],
             "styles": [
               "bootstrap/dist/css/bootstrap.css",
-              "@angular/material/prebuilt-themes/rose-red.css",
               "src/custom-theme.scss",
               "src/styles.css"
             ]

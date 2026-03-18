@@ -1,0 +1,30 @@
+<div class="d-flex flex-column h-100">
+    <div class="container-fluid">
+        <div class="d-flex mb-3 flex-column mensagens pe-3 ps-2">
+            @for(m of lista(); track m) {
+            <div class="mensagem-item mb-3 border-bottom d-flex flex-column">
+                <div class="d-flex justify-content-between text-danger">
+                    <div class="fs-7">{{m.usuario}} às {{m.created | date: 'dd/MM/yyyy HH:mm:ss'}}
+                    </div>
+                    <div class="cursor text-danger"><mat-icon (click)="remover(m.id)">delete</mat-icon></div>
+                </div>
+                <div class="monospace shadow-sm border-success p-3 rounded">
+                    <code class="text-descricao font-monospace">
+                        {{m.mensagem}}
+                    </code>
+                </div>
+            </div>
+            }
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+
+                <mat-form-field class="w-100" appearance="fill">
+                    <mat-label>Mensagem</mat-label>
+                    <textarea matInput [formControl]="mensagem" (keydown.enter)="enviar()"></textarea>
+                </mat-form-field>
+
+            </div>
+        </div>
+    </div>
+</div>

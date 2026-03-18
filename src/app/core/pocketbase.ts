@@ -57,8 +57,8 @@ export class PocketbaseService {
     );
   }
 
-  notificar(colecao: string, fn: (e: any) => void) {
-    return from(this.client.collection(colecao).subscribe('*', fn)).pipe(
+  notificar(colecao: string, fn: (e: any) => void, event: string = '*') {
+    return from(this.client.collection(colecao).subscribe(event, fn)).pipe(
       finalize(() => this.loader.hide()),
     );
   }
