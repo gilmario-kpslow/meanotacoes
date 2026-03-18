@@ -12,8 +12,7 @@ export class PocketbaseService {
   private readonly loader = inject(LoadService);
 
   constructor() {
-    this.client = new PocketBase(environment.api);
-    this.client.autoCancellation(true);
+    this.client = new PocketBase(environment.api).autoCancellation(false);
     this.client.afterSend = (response, data) => {
       this.loader.hide();
       return data;
