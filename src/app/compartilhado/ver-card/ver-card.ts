@@ -4,6 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { TagsComponent } from '../components/tags/tags';
 import { MatIconModule } from '@angular/material/icon';
+import { MatInput } from "@angular/material/input";
 
 @Component({
   selector: 'app-ver-card',

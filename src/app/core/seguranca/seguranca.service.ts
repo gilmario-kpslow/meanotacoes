@@ -13,19 +13,21 @@ export class SegurancaService {
     logado = signal(false);
 
     constructor() {
-        if (this.tokenValido()) {
-            this.usuario = {
-                record: this.pocketbase.authStore().record,
-                token: this.pocketbase.authStore().token,
-            };
-        }
+        this.pocketbase.verificaLogin().subscribe(() => {
+            if (this.tokenValido()) {
+                this.usuario = {
+                    record: this.pocketbase.authStore().record,
+                    token: this.pocketbase.authStore().token,
+                };
+                this.logar(this.usuario);
+            }
+        });
+
     }
 
     logar(user: UsuarioLogado) {
         this.usuario = user;
-
         this.logado.set(true);
-
         this.router.navigate(['/']);
     }
 

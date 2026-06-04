@@ -41,7 +41,8 @@ export class AnotacaoComponent {
 
   ver() {
     this.dialog.open(VerCard, {
-      width: '800px',
+      width: '900px',
+      height: '490px',
       data: this.item(),
     });
   }

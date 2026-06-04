@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import PocketBase from 'pocketbase';
-import { finalize, from, Observable } from 'rxjs';
+import { finalize, from, Observable, of } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { USUARIOS } from './constantes/colecoes';
 import { ListaResponse } from './models/lista-respone';
@@ -23,6 +23,13 @@ export class PocketbaseService {
       return { url, options };
     };
 
+  }
+
+  verificaLogin() {
+    if (this.client.authStore.isValid) {
+      return from(this.client.collection(USUARIOS).authRefresh())
+    }
+    return of();
   }
 
   login(req: any) {

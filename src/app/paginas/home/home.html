@@ -5,13 +5,14 @@
             <div class="col-md-4">
                 <mat-form-field class="w-100" appearance="fill">
                     <mat-label>Título</mat-label>
-                    <input type="text" matInput required appInputContent [formControl]="titulo">
+                    <input type="text" matInput required appInputContent [formControl]="titulo"
+                        placeholder="Pesquisar pelo titulo">
                 </mat-form-field>
             </div>
             <div class="col-md-4">
                 <mat-form-field appearance="fill" class="w-100">
                     <mat-label>TAG</mat-label>
-                    <mat-chip-grid #chipGrid aria-label="Enter keywords" style="width: 100%;">
+                    <mat-chip-grid #chipGrid aria-label="Enter keywords" class="w-100">
                         @for (keyword of keywords(); track keyword) {
                         <mat-chip-row (removed)="removeKeyword(keyword)">
                             {{keyword}}
@@ -21,7 +22,7 @@
                         </mat-chip-row>
                         }
                     </mat-chip-grid>
-                    <input placeholder="" [matChipInputFor]="chipGrid" (matChipInputTokenEnd)="add($event)" />
+                    <input placeholder="TAG" [matChipInputFor]="chipGrid" (matChipInputTokenEnd)="add($event)" />
                 </mat-form-field>
             </div>
         </div>
